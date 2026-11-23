@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verificare DNS și email: SPF, DKIM, DMARC, MX — NBT Host</title>
+<meta name="description" content="Verifici gratuit DNS-ul unui domeniu: A, NS, MX, SPF, DKIM, DMARC și CAA, cu explicații în română. Open source, rulează în browser.">
+<link rel="canonical" href="https://nbt-host.com/instrumente/verificare-dns-email">
+<link rel="alternate" hreflang="ro" href="https://nbt-host.com/instrumente/verificare-dns-email">
+<link rel="alternate" hreflang="en" href="https://nbt-host.com/en/tools/dns-email-checker">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="assets/baza.css">
+<link rel="stylesheet" href="assets/instrumente.css">
+</head>
+<body>
+<div class="wrap"><header class="top"><a href="https://nbt-host.com/">NBT Host</a><nav aria-label="Instrumente"><a href="index.html" aria-current="page">Verificare DNS și email</a><a href="generator-spf-dmarc.html">Generator SPF / DMARC</a><a href="https://nbt-host.com/instrumente/verificare-domeniu">Verificare domeniu ↗</a><a href="en/index.html" hreflang="en" lang="en">English</a></nav></header></div>
+<main id="main" data-it="dns">
+<section class="hero"><div class="wrap"><h1>Verificare DNS <em>și email.</em></h1><p class="lead">Scrii domeniul și vezi unde arată site-ul, cine primește emailurile și dacă SPF, DKIM și DMARC sunt puse corect. Gratuit, fără cont, totul în browser.</p>
+<form class="it-form glass" id="itForm" role="search" action="" method="get">
+        <svg class="it-form-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg>
+        <label class="sr-only" for="itQ">Domeniul de verificat</label>
+        <input id="itQ" name="domeniu" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="253" placeholder="firma-ta.ro" required>
+        <button class="btn" type="submit" id="itGo"><span class="lbl"><i data-l="Verifică">Verifică</i></span><svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M15 6H1M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+<div class="it-opts"><label for="itSel">Selector DKIM</label><input id="itSel" name="selector" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="63" value="default"></div>
+</div></section>
+<section class="it-res" id="itRes" data-now="Rezultat" hidden>
+  <div class="it-in"><div class="it-live" id="itLive" aria-live="polite"></div></div>
+</section>
+<section class="it-body"><div class="wrap"><section class="gd-sec" id="ce-verifica">
+        <h2>Ce verifică</h2>
+        <ul>
+          <li><strong>A și AAAA</strong> — adresa serverului pe care stă site-ul.</li>
+          <li><strong>NS</strong> — nameserverele, adică locul unde se schimbă DNS-ul domeniului: la NBT Host, la Cloudflare sau la firma de la care ai cumpărat domeniul.</li>
+          <li><strong>MX</strong> — serverele care primesc emailurile pentru adresele de pe domeniu.</li>
+          <li><strong>SPF</strong> — lista serverelor care au voie să trimită emailuri în numele domeniului.</li>
+          <li><strong>DKIM</strong> — cheia publică cu care destinatarul verifică semnătura mesajelor tale. Stă sub un „selector”: pe găzduirea NBT Host (Enhance) selectorul e <code>hostingcp</code>; Google Workspace folosește de obicei <code>google</code>, iar Microsoft 365 <code>selector1</code> și <code>selector2</code>. Le încercăm automat pe toate, plus cel scris de tine.</li>
+          <li><strong>DMARC</strong> — regula ta pentru mesajele care pretind că vin de la domeniu, dar nu trec SPF sau DKIM.</li>
+          <li><strong>CAA</strong> — ce autorități au voie să emită certificate SSL pentru domeniu.</li>
+        </ul>
+      </section></div></section>
+</main>
+<footer class="ft"><div class="wrap"><p>Instrument open source, licență MIT, întreținut de <a href="https://nbt-host.com/">NBT Host</a> — găzduire web, VPS și domenii din România. Codul: <a href="https://github.com/nbt-host/verificare-dns-email">github.com/nbt-host/verificare-dns-email</a>. Totul rulează în browserul tău; nu păstrăm și nu trimitem nicăieri domeniile verificate.</p><p>Ghiduri pas cu pas: <a href="https://nbt-host.com/ghiduri/mailuri-in-spam-spf-dkim-dmarc">mailuri în spam: SPF, DKIM, DMARC</a> · <a href="https://nbt-host.com/ghiduri/dmarc-pas-cu-pas">DMARC pas cu pas</a>.</p></div></footer>
+<script src="assets/instrumente.js"></script>
+</body>
+</html>

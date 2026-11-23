@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generator SPF și DMARC gratuit — NBT Host</title>
+<meta name="description" content="Construiești înregistrările SPF și DMARC pentru domeniul tău, cu explicații în română. Open source, totul local în browser.">
+<link rel="canonical" href="https://nbt-host.com/instrumente/generator-spf-dmarc">
+<link rel="alternate" hreflang="ro" href="https://nbt-host.com/instrumente/generator-spf-dmarc">
+<link rel="alternate" hreflang="en" href="https://nbt-host.com/en/tools/spf-dmarc-generator">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="assets/baza.css">
+<link rel="stylesheet" href="assets/instrumente.css">
+</head>
+<body>
+<div class="wrap"><header class="top"><a href="https://nbt-host.com/">NBT Host</a><nav aria-label="Instrumente"><a href="index.html">Verificare DNS și email</a><a href="generator-spf-dmarc.html" aria-current="page">Generator SPF / DMARC</a><a href="https://nbt-host.com/instrumente/verificare-domeniu">Verificare domeniu ↗</a><a href="en/spf-dmarc-generator.html" hreflang="en" lang="en">English</a></nav></header></div>
+<main id="main" data-it="gen">
+<section class="hero"><div class="wrap"><h1>Generator <em>SPF și DMARC.</em></h1><p class="lead">Bifezi cine trimite emailuri în numele domeniului și primești înregistrările gata de copiat. Nu se trimite nimic nicăieri.</p>
+</div></section>
+<section class="it-gen"><div class="wrap"><form class="it-gen-g" id="itGen" action="#" novalidate>
+      <div class="it-panel glass it-card-wide">
+        <div class="f-g">
+          <label for="gDom">Domeniul (opțional)</label>
+          <div class="f-c"><input id="gDom" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="253" placeholder="firma-ta.ro"></div>
+          <small>Doar ca să vezi numele exacte ale înregistrărilor. Nu verificăm nimic online aici.</small>
+        </div>
+      </div>
+
+      <section class="it-panel glass" aria-labelledby="gSpfT">
+        <h2 id="gSpfT">SPF</h2>
+        <p>Lista serverelor care au voie să trimită emailuri „de la” domeniul tău.</p>
+        <fieldset>
+          <legend>Cine trimite emailuri</legend>
+          <div class="it-chk">
+            <label><input type="checkbox" id="gNbt" checked><span>Serverul de email al domeniului — găzduirea NBT Host trimite de pe el <code>a mx</code></span></label>
+            <label><input type="checkbox" id="gNbtIp"><span>Adresa serverului NBT Host, pentru DNS la Cloudflare (cu proxy) sau la alt furnizor <code>ip4:185.230.138.193</code></span></label>
+            <label><input type="checkbox" id="gGoogle"><span>Google Workspace <code>include:_spf.google.com</code></span></label>
+            <label><input type="checkbox" id="gMs"><span>Microsoft 365 <code>include:spf.protection.outlook.com</code></span></label>
+          </div>
+        </fieldset>
+        <div class="f-g">
+          <label for="gInc">Alte servicii (include)</label>
+          <div class="f-c"><input id="gInc" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="ex. spf.serviciu-newsletter.ro"></div>
+          <small>Valoarea pe care ți-o dă serviciul, după „include:”. Mai multe, separate prin spațiu.</small>
+        </div>
+        <div class="f-g">
+          <label for="gIp">Alte adrese IP</label>
+          <div class="f-c"><input id="gIp" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="ex. 203.0.113.10"></div>
+          <small>IPv4 sau IPv6, cu sau fără /prefix. Mai multe, separate prin spațiu.</small>
+        </div>
+        <fieldset>
+          <legend>Restul serverelor</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAll" value="~all" checked>~all — suspecte (recomandat)</label>
+            <label><input type="radio" name="gAll" value="-all">-all — respinse</label>
+            <label><input type="radio" name="gAll" value="?all">?all — neutru</label>
+          </div>
+        </fieldset>
+        <div class="it-out">
+          <dl class="it-out-n"><dt>Tip</dt><dd>TXT</dd><dt>Nume</dt><dd data-g-at>@ (domeniul gol)</dd></dl>
+          <div class="gd-code"><pre><code id="gSpf">v=spf1 a mx ~all</code></pre><button class="gd-copy" type="button" data-g-copy="gSpf">Copiază</button></div>
+          <ul class="it-msgs" id="gSpfMsg" aria-live="polite"></ul>
+        </div>
+      </section>
+
+      <section class="it-panel glass" aria-labelledby="gDmT">
+        <h2 id="gDmT">DMARC</h2>
+        <p>Ce fac serverele cu mesajele care pretind că vin de la tine, dar nu trec SPF sau DKIM.</p>
+        <fieldset>
+          <legend>Politica (p=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gP" value="none" checked>none — doar observă</label>
+            <label><input type="radio" name="gP" value="quarantine">quarantine — în spam</label>
+            <label><input type="radio" name="gP" value="reject">reject — respinse</label>
+          </div>
+        </fieldset>
+        <div class="f-g">
+          <label for="gRua">Adresa pentru rapoarte (rua=)</label>
+          <div class="f-c"><input id="gRua" type="email" multiple autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="dmarc@firma-ta.ro"></div>
+          <small>Recomandat: o căsuță doar pentru rapoarte. Vin zilnic, ca fișiere atașate.</small>
+        </div>
+        <div class="f-g">
+          <label for="gSp">Subdomeniile (sp=)</label>
+          <div class="f-c sel"><select id="gSp"><option value="">La fel ca domeniul</option><option value="none">none</option><option value="quarantine">quarantine</option><option value="reject">reject</option></select></div>
+        </div>
+        <div class="f-g">
+          <label for="gPct">Procent din mesaje (pct=)</label>
+          <div class="f-c"><input id="gPct" type="number" inputmode="numeric" min="1" max="100" value="100"></div>
+          <small>Contează doar la quarantine și reject. 100 = toate.</small>
+        </div>
+        <fieldset>
+          <legend>Potrivirea domeniului DKIM (adkim=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAdkim" value="r" checked>relaxată (implicit)</label>
+            <label><input type="radio" name="gAdkim" value="s">strictă</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Potrivirea domeniului SPF (aspf=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAspf" value="r" checked>relaxată (implicit)</label>
+            <label><input type="radio" name="gAspf" value="s">strictă</label>
+          </div>
+        </fieldset>
+        <div class="it-out">
+          <dl class="it-out-n"><dt>Tip</dt><dd>TXT</dd><dt>Nume</dt><dd data-g-dmarc>_dmarc</dd></dl>
+          <div class="gd-code"><pre><code id="gDmarc">v=DMARC1; p=none</code></pre><button class="gd-copy" type="button" data-g-copy="gDmarc">Copiază</button></div>
+          <ul class="it-msgs" id="gDmarcMsg" aria-live="polite"></ul>
+        </div>
+      </section>
+    </form></div></section>
+</main>
+<footer class="ft"><div class="wrap"><p>Instrument open source, licență MIT, întreținut de <a href="https://nbt-host.com/">NBT Host</a> — găzduire web, VPS și domenii din România. Codul: <a href="https://github.com/nbt-host/verificare-dns-email">github.com/nbt-host/verificare-dns-email</a>. Totul rulează în browserul tău; nu păstrăm și nu trimitem nicăieri domeniile verificate.</p><p>Ghiduri pas cu pas: <a href="https://nbt-host.com/ghiduri/mailuri-in-spam-spf-dkim-dmarc">mailuri în spam: SPF, DKIM, DMARC</a> · <a href="https://nbt-host.com/ghiduri/dmarc-pas-cu-pas">DMARC pas cu pas</a>.</p></div></footer>
+<script src="assets/instrumente.js"></script>
+</body>
+</html>
