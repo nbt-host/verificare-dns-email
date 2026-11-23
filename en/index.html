@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNS and email check: SPF, DKIM, DMARC, MX — NBT Host</title>
+<meta name="description" content="Free DNS and email check for any domain: A, NS, MX, SPF, DKIM, DMARC and CAA, explained in plain English. Open source, runs in your browser.">
+<link rel="canonical" href="https://nbt-host.com/en/tools/dns-email-checker">
+<link rel="alternate" hreflang="ro" href="https://nbt-host.com/instrumente/verificare-dns-email">
+<link rel="alternate" hreflang="en" href="https://nbt-host.com/en/tools/dns-email-checker">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="../assets/baza.css">
+<link rel="stylesheet" href="../assets/instrumente.css">
+</head>
+<body>
+<div class="wrap"><header class="top"><a href="https://nbt-host.com/en/">NBT Host</a><nav aria-label="Tools"><a href="index.html" aria-current="page">DNS and email check</a><a href="spf-dmarc-generator.html">SPF / DMARC generator</a><a href="https://nbt-host.com/en/tools/domain-checker">Domain checker ↗</a><a href="../index.html" hreflang="ro" lang="ro">Română</a></nav></header></div>
+<main id="main" data-it="dns">
+<section class="hero"><div class="wrap"><h1>DNS and email <em>check.</em></h1><p class="lead">Enter a domain and see right away where the website points, who receives the email and whether SPF, DKIM and DMARC are set up correctly, explained in plain English. Free, no account.</p>
+<form class="it-form glass" id="itForm" role="search" action="" method="get">
+        <svg class="it-form-i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg>
+        <label class="sr-only" for="itQ">Domain to check</label>
+        <input id="itQ" name="domeniu" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="253" placeholder="firma-ta.ro" required>
+        <button class="btn" type="submit" id="itGo"><span class="lbl"><i data-l="Check">Check</i></span><svg width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M15 6H1M15 6L10 1M15 6L10 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+<div class="it-opts"><label for="itSel">DKIM selector</label><input id="itSel" name="selector" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="63" value="default"></div>
+</div></section>
+<section class="it-res" id="itRes" data-now="Result" hidden>
+  <div class="it-in"><div class="it-live" id="itLive" aria-live="polite"></div></div>
+</section>
+<section class="it-body"><div class="wrap"><section class="gd-sec" id="ce-verifica">
+        <h2>What it checks</h2>
+        <ul>
+          <li><strong>A and AAAA</strong> — the address of the server the website is on.</li>
+          <li><strong>NS</strong> — the nameservers, that is, where the domain's DNS is managed: at NBT Host, at Cloudflare or at the company you bought the domain from.</li>
+          <li><strong>MX</strong> — the servers that receive email for the addresses on the domain.</li>
+          <li><strong>SPF</strong> — the list of servers allowed to send email on behalf of the domain.</li>
+          <li><strong>DKIM</strong> — the public key the recipient uses to verify your messages' signature. It sits under a “selector”: on NBT Host (Enhance) hosting the selector is <code>hostingcp</code>; Google Workspace usually uses <code>google</code>, and Microsoft 365 uses <code>selector1</code> and <code>selector2</code>. We try all of them automatically, plus the one you enter.</li>
+          <li><strong>DMARC</strong> — your rule for messages that claim to come from the domain but fail SPF or DKIM.</li>
+          <li><strong>CAA</strong> — which authorities may issue SSL certificates for the domain.</li>
+        </ul>
+      </section></div></section>
+</main>
+<footer class="ft"><div class="wrap"><p>Open source tool, MIT licence, maintained by <a href="https://nbt-host.com/en/">NBT Host</a> — European web hosting, VPS and domains, on servers in the EU. Source code: <a href="https://github.com/nbt-host/verificare-dns-email">github.com/nbt-host/verificare-dns-email</a>. Everything runs in your browser; we do not store or send the domains you check anywhere.</p><p>Step-by-step guides: <a href="https://nbt-host.com/en/guides/spf-dkim-dmarc">emails going to spam: SPF, DKIM, DMARC</a> · <a href="https://nbt-host.com/en/guides/dmarc-step-by-step">DMARC step by step</a>.</p></div></footer>
+<script src="../assets/instrumente.en.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free SPF and DMARC generator — NBT Host</title>
+<meta name="description" content="Build the SPF and DMARC records for your domain, with plain-English explanations. Open source, everything stays in your browser.">
+<link rel="canonical" href="https://nbt-host.com/en/tools/spf-dmarc-generator">
+<link rel="alternate" hreflang="ro" href="https://nbt-host.com/instrumente/generator-spf-dmarc">
+<link rel="alternate" hreflang="en" href="https://nbt-host.com/en/tools/spf-dmarc-generator">
+<meta name="referrer" content="no-referrer">
+<link rel="stylesheet" href="../assets/baza.css">
+<link rel="stylesheet" href="../assets/instrumente.css">
+</head>
+<body>
+<div class="wrap"><header class="top"><a href="https://nbt-host.com/en/">NBT Host</a><nav aria-label="Tools"><a href="index.html">DNS and email check</a><a href="spf-dmarc-generator.html" aria-current="page">SPF / DMARC generator</a><a href="https://nbt-host.com/en/tools/domain-checker">Domain checker ↗</a><a href="../generator-spf-dmarc.html" hreflang="ro" lang="ro">Română</a></nav></header></div>
+<main id="main" data-it="gen">
+<section class="hero"><div class="wrap"><h1>SPF and DMARC <em>generator.</em></h1><p class="lead">Tick who sends email on behalf of your domain, choose how strict DMARC should be and copy the ready-made records. Everything is calculated in your browser; nothing is sent anywhere.</p>
+</div></section>
+<section class="it-gen" id="generator" data-now="Generator">
+  <div class="it-in">
+    <form class="it-gen-g" id="itGen" action="#" novalidate>
+      <div class="it-panel glass it-card-wide">
+        <div class="f-g">
+          <label for="gDom">Domain (optional)</label>
+          <div class="f-c"><input id="gDom" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" maxlength="253" placeholder="firma-ta.ro"></div>
+          <small>Only so you can see the exact record names. Nothing is checked online here.</small>
+        </div>
+      </div>
+
+      <section class="it-panel glass" aria-labelledby="gSpfT">
+        <h2 id="gSpfT">SPF</h2>
+        <p>The list of servers allowed to send email “from” your domain.</p>
+        <fieldset>
+          <legend>Who sends email</legend>
+          <div class="it-chk">
+            <label><input type="checkbox" id="gNbt" checked><span>The domain's mail server — NBT Host hosting sends from it <code>a mx</code></span></label>
+            <label><input type="checkbox" id="gNbtIp"><span>The NBT Host server address, for DNS at Cloudflare (proxied) or another provider <code>ip4:185.230.138.193</code></span></label>
+            <label><input type="checkbox" id="gGoogle"><span>Google Workspace <code>include:_spf.google.com</code></span></label>
+            <label><input type="checkbox" id="gMs"><span>Microsoft 365 <code>include:spf.protection.outlook.com</code></span></label>
+          </div>
+        </fieldset>
+        <div class="f-g">
+          <label for="gInc">Other services (include)</label>
+          <div class="f-c"><input id="gInc" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="e.g. spf.newsletter-service.com"></div>
+          <small>The value the service gives you, after “include:”. Separate several with spaces.</small>
+        </div>
+        <div class="f-g">
+          <label for="gIp">Other IP addresses</label>
+          <div class="f-c"><input id="gIp" type="text" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="e.g. 203.0.113.10"></div>
+          <small>IPv4 or IPv6, with or without a /prefix. Separate several with spaces.</small>
+        </div>
+        <fieldset>
+          <legend>All other servers</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAll" value="~all" checked>~all — suspicious (recommended)</label>
+            <label><input type="radio" name="gAll" value="-all">-all — rejected</label>
+            <label><input type="radio" name="gAll" value="?all">?all — neutral</label>
+          </div>
+        </fieldset>
+        <div class="it-out">
+          <dl class="it-out-n"><dt>Type</dt><dd>TXT</dd><dt>Name</dt><dd data-g-at>@ (the bare domain)</dd></dl>
+          <div class="gd-code"><pre><code id="gSpf">v=spf1 a mx ~all</code></pre><button class="gd-copy" type="button" data-g-copy="gSpf">Copy</button></div>
+          <ul class="it-msgs" id="gSpfMsg" aria-live="polite"></ul>
+        </div>
+      </section>
+
+      <section class="it-panel glass" aria-labelledby="gDmT">
+        <h2 id="gDmT">DMARC</h2>
+        <p>What servers do with messages that claim to come from you but fail SPF or DKIM.</p>
+        <fieldset>
+          <legend>Policy (p=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gP" value="none" checked>none — monitor only</label>
+            <label><input type="radio" name="gP" value="quarantine">quarantine — to spam</label>
+            <label><input type="radio" name="gP" value="reject">reject — rejected</label>
+          </div>
+        </fieldset>
+        <div class="f-g">
+          <label for="gRua">Address for reports (rua=)</label>
+          <div class="f-c"><input id="gRua" type="email" multiple autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="dmarc@firma-ta.ro"></div>
+          <small>Recommended: a mailbox just for reports. They arrive daily, as attachments.</small>
+        </div>
+        <div class="f-g">
+          <label for="gSp">Subdomains (sp=)</label>
+          <div class="f-c sel"><select id="gSp"><option value="">Same as the domain</option><option value="none">none</option><option value="quarantine">quarantine</option><option value="reject">reject</option></select></div>
+        </div>
+        <div class="f-g">
+          <label for="gPct">Percentage of messages (pct=)</label>
+          <div class="f-c"><input id="gPct" type="number" inputmode="numeric" min="1" max="100" value="100"></div>
+          <small>Only matters with quarantine and reject. 100 = all.</small>
+        </div>
+        <fieldset>
+          <legend>DKIM domain alignment (adkim=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAdkim" value="r" checked>relaxed (default)</label>
+            <label><input type="radio" name="gAdkim" value="s">strict</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>SPF domain alignment (aspf=)</legend>
+          <div class="it-seg">
+            <label><input type="radio" name="gAspf" value="r" checked>relaxed (default)</label>
+            <label><input type="radio" name="gAspf" value="s">strict</label>
+          </div>
+        </fieldset>
+        <div class="it-out">
+          <dl class="it-out-n"><dt>Type</dt><dd>TXT</dd><dt>Name</dt><dd data-g-dmarc>_dmarc</dd></dl>
+          <div class="gd-code"><pre><code id="gDmarc">v=DMARC1; p=none</code></pre><button class="gd-copy" type="button" data-g-copy="gDmarc">Copy</button></div>
+          <ul class="it-msgs" id="gDmarcMsg" aria-live="polite"></ul>
+        </div>
+      </section>
+    </form>
+  </div>
+</section>
+</main>
+<footer class="ft"><div class="wrap"><p>Open source tool, MIT licence, maintained by <a href="https://nbt-host.com/en/">NBT Host</a> — European web hosting, VPS and domains, on servers in the EU. Source code: <a href="https://github.com/nbt-host/verificare-dns-email">github.com/nbt-host/verificare-dns-email</a>. Everything runs in your browser; we do not store or send the domains you check anywhere.</p><p>Step-by-step guides: <a href="https://nbt-host.com/en/guides/spf-dkim-dmarc">emails going to spam: SPF, DKIM, DMARC</a> · <a href="https://nbt-host.com/en/guides/dmarc-step-by-step">DMARC step by step</a>.</p></div></footer>
+<script src="../assets/instrumente.en.js"></script>
+</body>
+</html>
